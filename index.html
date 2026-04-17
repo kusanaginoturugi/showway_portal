@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>showway portal</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>showway portal</h1>
+      <p class="tagline">成果物 &amp; 運用ツール ダッシュボード</p>
+      <div class="meta">
+        <span class="meta-item">
+          <span class="label">最終チェック:</span>
+          <span id="last-checked">-</span>
+        </span>
+        <button id="refresh" type="button">再チェック</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="group">
+      <h2>公開プロダクト</h2>
+      <p class="group-desc">一般公開している成果物。</p>
+      <div id="cards-public" class="cards"></div>
+    </section>
+
+    <section class="group">
+      <h2>運用ツール <span class="badge">Basic認証</span></h2>
+      <p class="group-desc">
+        Basic認証で保護されたサイト。死活判定は「HTTP応答が返るか (401を含む)」で行います。
+      </p>
+      <div id="cards-private" class="cards"></div>
+    </section>
+
+    <section class="legend">
+      <h3>ステータス凡例</h3>
+      <ul>
+        <li><span class="dot dot-up"></span> UP: 応答あり (200 / 301 / 401 等)</li>
+        <li><span class="dot dot-down"></span> DOWN: 到達不能 / ネットワークエラー</li>
+        <li><span class="dot dot-checking"></span> CHECKING: 確認中</li>
+      </ul>
+      <p class="note">
+        ブラウザのCORS制約により、レスポンスボディは読めません。そのため「応答が返ってきたか否か」
+        のみで判定しています。Basic認証サイトでも 401 が返れば UP と判断されます。
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>&copy; showway.biz</small>
+    </div>
+  </footer>
+
+  <script src="assets/sites.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
