@@ -3,6 +3,13 @@
 window.SITES = {
   public: [
     {
+      name: 'SHOW way BIZ',
+      subtitle: 'ソフトウェア開発を生業としております',
+      url: 'https://www.showway.biz/',
+      description: 'showway.biz のコーポレート / プロフィールサイト。',
+      lastUpdated: null
+    },
+    {
       name: 'Wallpapermaker',
       subtitle: '技術メモ壁紙ジェネレータ',
       url: 'https://wallpapermaker.showway.biz/',
@@ -51,6 +58,13 @@ window.SITES = {
       subtitle: '請求書管理',
       url: 'https://invoiceplane.showway.biz/',
       description: '請求書発行・管理システム。',
+      lastUpdated: null
+    },
+    {
+      name: 'わたしの家族',
+      subtitle: 'うちの家族の記録',
+      url: 'https://mf.showway.biz/',
+      description: '家族の記録を残すプライベートサイト。',
       lastUpdated: null
     }
   ]
