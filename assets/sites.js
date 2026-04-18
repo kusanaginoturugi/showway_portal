@@ -29,6 +29,13 @@ window.SITES = {
       url: 'https://djmachine.showway.biz/',
       description: 'ミュージックルーム。',
       lastUpdated: null
+    },
+    {
+      name: 'pwnana',
+      subtitle: 'CTF / セキュリティ学習ノート',
+      url: 'https://kusanaginoturugi.github.io/pwnana/',
+      description: 'GitHub Pages でホストしているノート。',
+      lastUpdated: null
     }
   ],
   private: [
