@@ -1,0 +1,60 @@
+# ==================================================================
+# Prometheus 設定への追記用スニペット。
+# 既存の /etc/prometheus/prometheus.yml の scrape_configs: 以下に追記する。
+# ==================================================================
+
+scrape_configs:
+  # ------------------------------------------------------------------
+  # 公開サイト (未認証) の外形監視
+  # ------------------------------------------------------------------
+  - job_name: 'blackbox_origin_public'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+          - https://www.showway.biz/
+          - https://wallpapermaker.showway.biz/
+          - https://summa.showway.biz/
+          - https://djmachine.showway.biz/
+        labels:
+          category: public
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:9115
+
+  # ------------------------------------------------------------------
+  # Basic 認証サイトの外形監視 (401 を UP と見なす)
+  # ------------------------------------------------------------------
+  - job_name: 'blackbox_origin_basic_auth'
+    metrics_path: /probe
+    params:
+      module: [http_401_ok]
+    static_configs:
+      - targets:
+          - https://memos.showway.biz/
+          - https://grafana.showway.biz/login
+          - https://redmine.showway.biz/
+          - https://invoiceplane.showway.biz/
+          - https://mf.showway.biz/
+        labels:
+          category: private
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: localhost:9115
+
+  # ------------------------------------------------------------------
+  # (既存のジョブがあればそのまま残す)
+  # 例: blackbox_exporter 自体の self-metrics 収集
+  # ------------------------------------------------------------------
+  - job_name: 'blackbox_exporter'
+    static_configs:
+      - targets: ['localhost:9115']
