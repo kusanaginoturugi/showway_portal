@@ -1,0 +1,25 @@
+modules:
+  # 公開サイト向け: 2xx / 3xx を UP と見なす
+  http_2xx:
+    prober: http
+    timeout: 10s
+    http:
+      preferred_ip_protocol: ip4
+      valid_status_codes: []  # 空 = 2xx と 3xx がデフォルトで OK
+      method: GET
+      fail_if_ssl: false
+      fail_if_not_ssl: false
+      tls_config:
+        insecure_skip_verify: false
+
+  # Basic 認証サイト向け: 401 も UP として扱う
+  http_401_ok:
+    prober: http
+    timeout: 10s
+    http:
+      preferred_ip_protocol: ip4
+      valid_status_codes: [200, 301, 302, 401]
+      method: GET
+      fail_if_not_ssl: true
+      tls_config:
+        insecure_skip_verify: false
