@@ -1,0 +1,128 @@
+/**
+ * showway Design System — Colors & Typography
+ * Source: claude.ai/design 由来のトークン定義
+ *
+ * Usage:
+ *   <link rel="stylesheet" href="assets/colors_and_type.css">
+ *   <link rel="stylesheet" href="assets/style.css">
+ */
+
+/* ─────────────────────────────────────────
+   BASE COLOR TOKENS
+───────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --sw-bg:            #f7f8fa;
+  --sw-panel:         #ffffff;
+  --sw-panel-hover:   #eef1f6;
+  --sw-header-top:    #eef2f8;
+
+  /* Borders */
+  --sw-border:        #d9dee7;
+
+  /* Text */
+  --sw-text:          #1a1d23;
+  --sw-text-dim:      #556070;
+
+  /* Accent / Brand */
+  --sw-accent:        #1d4ed8;
+
+  /* Status */
+  --sw-up:            #0a8a5a;
+  --sw-down:          #c81e1e;
+  --sw-checking:      #a15c00;
+
+  /* Badge */
+  --sw-badge-bg:      #e4ebf6;
+  --sw-badge-fg:      #1d3b74;
+
+  /* Shadow */
+  --sw-shadow:        0 1px 2px rgba(16,24,40,0.04), 0 1px 3px rgba(16,24,40,0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sw-bg:           #0f1115;
+    --sw-panel:        #171a21;
+    --sw-panel-hover:  #1d212b;
+    --sw-header-top:   #13161d;
+    --sw-border:       #262b36;
+    --sw-text:         #e6e8ee;
+    --sw-text-dim:     #9aa3b2;
+    --sw-accent:       #6aa5ff;
+    --sw-up:           #38d39f;
+    --sw-down:         #ff5e5e;
+    --sw-checking:     #c9a93a;
+    --sw-badge-bg:     #2a3142;
+    --sw-badge-fg:     #b6c3dc;
+    --sw-shadow:       none;
+  }
+}
+
+/* ─────────────────────────────────────────
+   SEMANTIC COLOR ALIASES
+───────────────────────────────────────── */
+:root {
+  --sw-fg1:           var(--sw-text);
+  --sw-fg2:           var(--sw-text-dim);
+  --sw-surface:       var(--sw-panel);
+  --sw-surface-hover: var(--sw-panel-hover);
+  --sw-link:          var(--sw-accent);
+  --sw-focus:         var(--sw-accent);
+  --sw-status-ok:     var(--sw-up);
+  --sw-status-error:  var(--sw-down);
+  --sw-status-warn:   var(--sw-checking);
+}
+
+/* ─────────────────────────────────────────
+   TYPOGRAPHY TOKENS
+───────────────────────────────────────── */
+:root {
+  /* Font families */
+  --sw-font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", sans-serif;
+  --sw-font-mono:
+    "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Scale */
+  --sw-text-xs:    12px;
+  --sw-text-sm:    13px;
+  --sw-text-md:    14px;
+  --sw-text-base:  16px;
+  --sw-text-lg:    20px;
+  --sw-text-xl:    22px;
+  --sw-text-2xl:   28px;
+
+  /* Weight */
+  --sw-weight-normal:   400;
+  --sw-weight-semibold: 600;
+  --sw-weight-bold:     700;
+
+  /* Leading */
+  --sw-leading-tight:  1.3;
+  --sw-leading-base:   1.7;
+
+  /* Tracking */
+  --sw-tracking-heading: 0.02em;
+}
+
+/* ─────────────────────────────────────────
+   SPACING & RADIUS TOKENS
+───────────────────────────────────────── */
+:root {
+  --sw-space-1:   4px;
+  --sw-space-2:   8px;
+  --sw-space-3:  10px;
+  --sw-space-4:  14px;
+  --sw-space-5:  16px;
+  --sw-space-6:  20px;
+  --sw-space-7:  24px;
+  --sw-space-8:  32px;
+  --sw-space-9:  40px;
+
+  --sw-radius-sm:   4px;
+  --sw-radius-md:   6px;
+  --sw-radius-lg:  10px;
+  --sw-radius-pill: 999px;
+}

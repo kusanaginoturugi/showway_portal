@@ -5,10 +5,11 @@
 ## 構成
 
 ```
-index.html        メインページ
-assets/style.css  スタイル
-assets/sites.js   サイト一覧データ (手動更新)
-assets/app.js     死活チェック / 描画ロジック
+index.html                   メインページ
+assets/colors_and_type.css   デザインシステムのトークン (--sw-*: 色・タイポ・スペーシング・角丸)
+assets/style.css             レイアウト / コンポーネントスタイル (上記トークンを参照)
+assets/sites.js              サイト一覧データ (手動更新)
+assets/app.js                死活チェック / 描画ロジック
 ```
 
 ## ローカル確認
