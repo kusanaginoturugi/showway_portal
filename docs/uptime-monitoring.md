@@ -58,9 +58,7 @@ sudo systemctl restart prometheus-blackbox-exporter
 127.0.0.1 summa.showway.biz
 127.0.0.1 djmachine.showway.biz
 127.0.0.1 memos.showway.biz
-127.0.0.1 grafana.showway.biz
 127.0.0.1 redmine.showway.biz
-127.0.0.1 invoiceplane.showway.biz
 127.0.0.1 mf.showway.biz
 ```
 

@@ -47,24 +47,10 @@ window.SITES = {
       lastUpdated: null
     },
     {
-      name: 'Grafana',
-      subtitle: 'メトリクス可視化',
-      url: 'https://grafana.showway.biz/login',
-      description: 'メトリクス可視化・モニタリングダッシュボード。',
-      lastUpdated: null
-    },
-    {
       name: 'Redmine',
       subtitle: 'プロジェクト管理',
       url: 'https://redmine.showway.biz/',
       description: 'チケット駆動のプロジェクト管理ツール。',
-      lastUpdated: null
-    },
-    {
-      name: 'InvoicePlane',
-      subtitle: '請求書管理',
-      url: 'https://invoiceplane.showway.biz/',
-      description: '請求書発行・管理システム。',
       lastUpdated: null
     },
     {

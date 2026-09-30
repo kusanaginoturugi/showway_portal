@@ -37,9 +37,7 @@ scrape_configs:
     static_configs:
       - targets:
           - https://memos.showway.biz/
-          - https://grafana.showway.biz/login
           - https://redmine.showway.biz/
-          - https://invoiceplane.showway.biz/
           - https://mf.showway.biz/
         labels:
           category: private
