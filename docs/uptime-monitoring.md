@@ -1,4 +1,4 @@
-# オリジン外形監視セットアップ (Blackbox Exporter + Prometheus + Grafana)
+# オリジン外形監視セットアップ (Blackbox Exporter + Prometheus)
 
 Cloudflare 経由のブラウザ fetch では判別できない「オリジン本体が落ちている」状態を、
 コンテナ内から直接プローブすることで検知する構成。
@@ -7,7 +7,6 @@ Cloudflare 経由のブラウザ fetch では判別できない「オリジン�
 
 - systemd-nspawn コンテナ (Ubuntu 24.04)
 - Prometheus がコンテナ内で稼働中 (apt 導入想定、設定は `/etc/prometheus/prometheus.yml`)
-- Grafana がコンテナ内で稼働中 (apt 導入想定、`https://grafana.showway.biz/`)
 - 監視対象のオリジンがすべて同じコンテナ内で稼働中
 
 ## 全体像
@@ -101,7 +100,30 @@ http://localhost:9090/targets
 
 で全ターゲットが `UP` になっていることを確認。
 
-### 6. Grafana でダッシュボードをインポート
+## Phase 2: ポータルへの連携 (未着手)
+
+portal の `/index.html` から実際のオリジン死活を表示するには、以下のどれかが必要:
+
+1. ~~**Grafana 公開スナップショット**: 特定ダッシュボードを iframe 埋め込み~~ (Grafana 停止済みのため不可)
+2. **Prometheus の HTTP API を公開** + CORS 設定 → portal から fetch
+3. **小さな status.json 生成エンドポイント** を監視コンテナ側に用意 → portal から CORS 付き JSON で取得
+
+いずれも別途認証・CORS の設計が必要なので、Phase 2 として別 PR で検討する。
+
+## つまずきポイント
+
+| 症状 | 原因 | 対処 |
+| --- | --- | --- |
+| `probe_success 0` で 常に DOWN | `/etc/hosts` 未設定で Cloudflare 経由になっている | hosts 追加 or DNS 設定確認 |
+| `probe_ssl_last_chain_expiry_timestamp_seconds` が負の値 | ローカル reverse proxy の証明書が自己署名 | `insecure_skip_verify: true` を検討 |
+| 401 サイトが DOWN になる | `http_2xx` モジュールが使われている | Prometheus 側の `module:` を `http_401_ok` に |
+
+## 付録: Grafana ダッシュボード (停止済み・記録用)
+
+> **注意**: Grafana (`grafana.showway.biz`) はサービス停止済み。以下は再開する場合に備えた記録。
+> ダッシュボード定義 `config/grafana/uptime-dashboard.json` もそのため残してある。
+
+### ダッシュボードのインポート手順
 
 1. Grafana にログイン (`https://grafana.showway.biz/`)
 2. Prometheus データソースが未登録なら追加: `http://localhost:9090`
@@ -115,21 +137,8 @@ http://localhost:9090/targets
 - 応答時間
 - TLS 証明書の残り有効日数
 
-## Phase 2: ポータルへの連携 (未着手)
-
-portal の `/index.html` から実際のオリジン死活を表示するには、以下のどれかが必要:
-
-1. **Grafana 公開スナップショット**: 特定ダッシュボードを iframe 埋め込み
-2. **Prometheus の HTTP API を公開** + CORS 設定 → portal から fetch
-3. **小さな status.json 生成エンドポイント** を Grafana コンテナ側に用意 → portal から CORS 付き JSON で取得
-
-いずれも別途認証・CORS の設計が必要なので、Phase 2 として別 PR で検討する。
-
-## つまずきポイント
+### つまずきポイント
 
 | 症状 | 原因 | 対処 |
 | --- | --- | --- |
-| `probe_success 0` で 常に DOWN | `/etc/hosts` 未設定で Cloudflare 経由になっている | hosts 追加 or DNS 設定確認 |
-| `probe_ssl_last_chain_expiry_timestamp_seconds` が負の値 | ローカル reverse proxy の証明書が自己署名 | `insecure_skip_verify: true` を検討 |
-| 401 サイトが DOWN になる | `http_2xx` モジュールが使われている | Prometheus 側の `module:` を `http_401_ok` に |
 | Grafana パネルが `No data` | データソース未紐付け / 時刻範囲ズレ | パネル編集 → Data source を Prometheus に / Time range を now-1h 等に |
