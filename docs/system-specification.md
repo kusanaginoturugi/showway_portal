@@ -34,27 +34,33 @@ showway portal は、公開プロダクトと運用ツールの一覧、各サ�
 4. 初回表示時に全サイトへ簡易死活チェックを実行する。
 5. ユーザーが「再チェック」を押すと、同じ死活チェックを再実行する。
 
+### 2.3 使用技術
+
+| 区分 | 技術 |
+| --- | --- |
+| ポータル本体 | HTML / CSS / JavaScript (フレームワーク・ビルド工程なし) |
+| 配信 | Cloudflare Workers Assets (Wrangler) |
+| 外形監視 | Blackbox Exporter / Prometheus (YAML)、Grafana ダッシュボード定義 (JSON) |
+
 ## 3. 対象サイト
 
 ### 3.1 公開プロダクト
 
-| 名称 | URL | 用途 |
-| --- | --- | --- |
-| SHOW way BIZ | `https://www.showway.biz/` | コーポレート / プロフィールサイト |
-| Wallpapermaker | `https://wallpapermaker.showway.biz/` | 技術メモ壁紙ジェネレータ |
-| Summa | `https://summa.showway.biz/` | 青色申告・確定申告向け軽量経理入力ツール |
-| djmachine | `https://djmachine.showway.biz/` | Music Room |
-| pwnana | `https://kusanaginoturugi.github.io/pwnana/` | CTF / セキュリティ学習ノート |
+| 名称 | URL | 用途 | 言語 / フレームワーク |
+| --- | --- | --- | --- |
+| SHOW way BIZ | `https://www.showway.biz/` | コーポレート / プロフィールサイト | Hugo (テーマ: Ananke) / Markdown |
+| Wallpapermaker | `https://md2wallpaper.kusanaginoturugi.workers.dev/` | 技術メモ壁紙ジェネレータ | JavaScript / Cloudflare Workers (Browser Rendering, Durable Objects) |
+| Summa | `https://summa.showway.biz/` | 青色申告・確定申告向け軽量経理入力ツール | Ruby / Ruby on Rails 8.1 / Hotwire / SQLite |
+| djmachine | `https://djmachine.showway.biz/` | Music Room | Ruby / Ruby on Rails 8.1 / Hotwire / SQLite |
+| pwnana | `https://kusanaginoturugi.github.io/pwnana/` | 打ちやすいパスワードジェネレータ | HTML / CSS / JavaScript (Web 版)、Python (CLI 版) |
 
 ### 3.2 運用ツール
 
-| 名称 | URL | 用途 |
-| --- | --- | --- |
-| memos | `https://memos.showway.biz/` | メモ管理 |
-| Grafana | `https://grafana.showway.biz/login` | メトリクス可視化 |
-| Redmine | `https://redmine.showway.biz/` | プロジェクト管理 |
-| InvoicePlane | `https://invoiceplane.showway.biz/` | 請求書管理 |
-| わたしの家族 | `https://mf.showway.biz/` | 家族記録サイト |
+| 名称 | URL | 用途 | 言語 / フレームワーク |
+| --- | --- | --- | --- |
+| memos | `https://memos.showway.biz/` | メモ管理 | Go / React (OSS) |
+| Redmine | `https://redmine.showway.biz/` | プロジェクト管理 | Ruby / Ruby on Rails (OSS) |
+| わたしの家族 | `https://mf.showway.biz/` | 家族記録サイト | PHP / WordPress |
 
 ## 4. データ仕様
 

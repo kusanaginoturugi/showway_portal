@@ -12,7 +12,7 @@ window.SITES = {
     {
       name: 'Wallpapermaker',
       subtitle: '技術メモ壁紙ジェネレータ',
-      url: 'https://wallpapermaker.showway.biz/',
+      url: 'https://md2wallpaper.kusanaginoturugi.workers.dev/',
       description: '技術メモを美しい壁紙に変換するジェネレータ。',
       lastUpdated: null
     },
@@ -32,9 +32,9 @@ window.SITES = {
     },
     {
       name: 'pwnana',
-      subtitle: 'CTF / セキュリティ学習ノート',
+      subtitle: '打ちやすいパスワードジェネレータ',
       url: 'https://kusanaginoturugi.github.io/pwnana/',
-      description: 'GitHub Pages でホストしているノート。',
+      description: '発音しやすく左右交互打鍵で打ちやすいパスワードを生成するツール。',
       lastUpdated: null
     }
   ],
@@ -47,24 +47,10 @@ window.SITES = {
       lastUpdated: null
     },
     {
-      name: 'Grafana',
-      subtitle: 'メトリクス可視化',
-      url: 'https://grafana.showway.biz/login',
-      description: 'メトリクス可視化・モニタリングダッシュボード。',
-      lastUpdated: null
-    },
-    {
       name: 'Redmine',
       subtitle: 'プロジェクト管理',
       url: 'https://redmine.showway.biz/',
       description: 'チケット駆動のプロジェクト管理ツール。',
-      lastUpdated: null
-    },
-    {
-      name: 'InvoicePlane',
-      subtitle: '請求書管理',
-      url: 'https://invoiceplane.showway.biz/',
-      description: '請求書発行・管理システム。',
       lastUpdated: null
     },
     {
