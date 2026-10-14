@@ -54,13 +54,10 @@ sudo systemctl restart prometheus-blackbox-exporter
 
 ```
 127.0.0.1 www.showway.biz
-127.0.0.1 wallpapermaker.showway.biz
 127.0.0.1 summa.showway.biz
 127.0.0.1 djmachine.showway.biz
 127.0.0.1 memos.showway.biz
-127.0.0.1 grafana.showway.biz
 127.0.0.1 redmine.showway.biz
-127.0.0.1 invoiceplane.showway.biz
 127.0.0.1 mf.showway.biz
 ```
 
@@ -89,7 +86,7 @@ sudo systemctl reload prometheus
 ```sh
 curl -sG 'http://localhost:9115/probe' \
   --data-urlencode 'module=http_2xx' \
-  --data-urlencode 'target=https://wallpapermaker.showway.biz/' \
+  --data-urlencode 'target=https://www.showway.biz/' \
   | grep -E '^probe_success|^probe_http_status_code'
 ```
 
