@@ -12,17 +12,17 @@ showway portal は、公開プロダクトと運用ツールの一覧、各サ�
 
 | パス | 役割 |
 | --- | --- |
-| `index.html` | メイン画面。ヘッダー、公開プロダクト、運用ツール、凡例、フッターを定義する。 |
-| `assets/sites.js` | 表示対象サイトのマスターデータ。公開 / 非公開カテゴリ、名称、URL、説明、最終更新日を管理する。 |
-| `assets/app.js` | カード描画、死活チェック、再チェック操作、最終チェック日時更新を行う。 |
-| `assets/colors_and_type.css` | 色、文字、余白、角丸などのデザイントークンを定義する。 |
-| `assets/style.css` | 画面レイアウトとコンポーネントスタイルを定義する。 |
+| `public/index.html` | メイン画面。ヘッダー、公開プロダクト、運用ツール、凡例、フッターを定義する。 |
+| `public/assets/sites.js` | 表示対象サイトのマスターデータ。公開 / 非公開カテゴリ、名称、URL、説明、最終更新日を管理する。 |
+| `public/assets/app.js` | カード描画、死活チェック、再チェック操作、最終チェック日時更新を行う。 |
+| `public/assets/colors_and_type.css` | 色、文字、余白、角丸などのデザイントークンを定義する。 |
+| `public/assets/style.css` | 画面レイアウトとコンポーネントスタイルを定義する。 |
 | `wrangler.jsonc` | Cloudflare Workers Assets 向けの配信設定。 |
 | `config/blackbox/blackbox.yml` | Blackbox Exporter の HTTP プローブ設定。 |
 | `config/prometheus/scrape-blackbox.yml` | Prometheus の Blackbox scrape 設定スニペット。 |
 | `config/grafana/uptime-dashboard.json` | Grafana 用の外形監視ダッシュボード定義。 |
 | `docs/uptime-monitoring.md` | Blackbox Exporter / Prometheus / Grafana によるオリジン監視の導入手順。 |
-| `docs/auto-merge-setup.md` | GitHub auto-merge 運用のセットアップ手順。 |
+| `docs/auto-merge-setup.md` | 旧 PR 運用の記録。 |
 
 ### 2.2 実行方式
 
@@ -213,7 +213,7 @@ Cloudflare などの CDN / プロキシ経由では判別しにくいオリジ�
 ローカル確認は以下で行う。
 
 ```sh
-python3 -m http.server 8000
+python3 -m http.server 8000 --directory public
 ```
 
 ### 8.2 Cloudflare Workers Assets
@@ -225,7 +225,7 @@ python3 -m http.server 8000
 | name | `showway-portal` |
 | compatibility_date | `2026-04-29` |
 | observability | enabled |
-| assets.directory | `.` |
+| assets.directory | `./public` |
 | compatibility_flags | `nodejs_compat` |
 
 ## 9. ローカルテスト仕様
@@ -235,14 +235,14 @@ python3 -m http.server 8000
 ローカルではリポジトリルートで以下を実行し、ブラウザで `http://localhost:8000/` を開く。
 
 ```sh
-python3 -m http.server 8000
+python3 -m http.server 8000 --directory public
 ```
 
 確認項目は以下の通り。
 
 - `showway portal` のヘッダーが表示されること。
 - 公開プロダクトと運用ツールの 2 グループが表示されること。
-- `assets/sites.js` に定義された全サイトがカードとして表示されること。
+- `public/assets/sites.js` に定義された全サイトがカードとして表示されること。
 - 各カードにサイト名、サブタイトル、説明、最終更新日、外部リンク、ステータスが表示されること。
 - 初回表示時にステータスが `checking` から `up` または `down` に変化すること。
 - 「再チェック」ボタン押下で再度チェックが実行されること。
@@ -266,7 +266,7 @@ OS またはブラウザ開発者ツールでライト / ダークテーマを�
 
 ### 9.4 データ変更確認
 
-`assets/sites.js` を編集して、以下を確認する。
+`public/assets/sites.js` を編集して、以下を確認する。
 
 - `public` にサイトを追加すると公開プロダクトにカードが増えること。
 - `private` にサイトを追加すると運用ツールにカードが増えること。
@@ -275,7 +275,7 @@ OS またはブラウザ開発者ツールでライト / ダークテーマを�
 
 ### 9.5 死活チェックのローカル検証
 
-外部サイトの実状態に依存せず検証したい場合は、`assets/sites.js` の一時的なテストデータとして次のような URL を使う。
+外部サイトの実状態に依存せず検証したい場合は、`public/assets/sites.js` の一時的なテストデータとして次のような URL を使う。
 
 | URL 例 | 期待値 | 用途 |
 | --- | --- | --- |
@@ -309,16 +309,15 @@ Blackbox Exporter / Prometheus / Grafana の設定は、ポータル本体とは
 
 ### 10.1 サイト追加・変更
 
-サイトの追加、削除、名称変更、URL 変更、最終更新日の変更は `assets/sites.js` を編集して行う。
+サイトの追加、削除、名称変更、URL 変更、最終更新日の変更は `public/assets/sites.js` を編集して行う。
 
 ### 10.2 最終更新日
 
 `lastUpdated` は手動管理であり、自動更新されない。
 
-### 10.3 auto-merge
+### 10.3 Git 運用
 
-`docs/auto-merge-setup.md` に、GitHub の auto-merge を使った PR 運用手順が記載されている。
-ただし、リポジトリルートの `CLAUDE.md` は現在削除状態のため、同ドキュメントの前提とは差分がある。
+`main` へ直接コミット・push する。`docs/auto-merge-setup.md` は旧運用の記録。
 
 ## 11. 評価
 
@@ -336,19 +335,17 @@ Blackbox Exporter / Prometheus / Grafana の設定は、ポータル本体とは
 - 404 や 5xx でも HTTP 応答が返れば `up` になるため、サービス正常性の判定としては粗い。
 - CDN / プロキシ配下では、オリジン停止時でも CDN が応答すれば `up` になる。
 - チェック結果はブラウザ内だけで完結し、履歴保存、通知、アラート、複数地点監視はない。
-- `assets/sites.js` と Prometheus scrape 設定で監視対象が重複管理されており、更新漏れが起きやすい。
+- `public/assets/sites.js` と Prometheus scrape 設定で監視対象が重複管理されており、更新漏れが起きやすい。
 - `config/prometheus/scrape-blackbox.yml` は `scrape_configs:` から始まるため、既存 `prometheus.yml` へ貼り付ける際に階層の重複に注意が必要である。
 - `docs/uptime-monitoring.md` では Grafana パネル数を 4 と説明しているが、実際の JSON は 5 パネルを定義している。
-- `CLAUDE.md` が削除状態であり、`docs/auto-merge-setup.md` に記載された運用前提と一致していない。
 
 ### 11.3 改善提案
 
-1. `assets/sites.js` を単一の監視対象マスターとして扱い、Prometheus scrape 設定を生成する仕組みにする。
+1. `public/assets/sites.js` を単一の監視対象マスターとして扱い、Prometheus scrape 設定を生成する仕組みにする。
 2. Prometheus / Blackbox の結果から `status.json` を生成し、ポータルはそれを表示する方式に変更する。
 3. `status.json` には `state`、`statusCode`、`durationSeconds`、`checkedAt`、`source` を含める。
 4. ポータル上では「ブラウザ簡易チェック」と「オリジン監視」のどちらの結果かを明示する。
 5. `docs/uptime-monitoring.md` の Grafana パネル数説明を実装に合わせて修正する。
-6. auto-merge 運用を継続する場合は、`CLAUDE.md` を復元するか、現行運用に合わせて `docs/auto-merge-setup.md` を更新する。
 
 ## 12. 総合評価
 

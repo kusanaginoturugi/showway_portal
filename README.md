@@ -5,17 +5,17 @@
 ## 構成
 
 ```
-index.html                   メインページ
-assets/colors_and_type.css   デザインシステムのトークン (--sw-*: 色・タイポ・スペーシング・角丸)
-assets/style.css             レイアウト / コンポーネントスタイル (上記トークンを参照)
-assets/sites.js              サイト一覧データ (手動更新)
-assets/app.js                死活チェック / 描画ロジック
+public/index.html                   メインページ
+public/assets/colors_and_type.css   デザインシステムのトークン (--sw-*: 色・タイポ・スペーシング・角丸)
+public/assets/style.css             レイアウト / コンポーネントスタイル (上記トークンを参照)
+public/assets/sites.js              サイト一覧データ (手動更新)
+public/assets/app.js                死活チェック / 描画ロジック
 ```
 
 ## ローカル確認
 
 ```sh
-python3 -m http.server 8000
+python3 -m http.server 8000 --directory public
 # → http://localhost:8000/
 ```
 
@@ -32,14 +32,14 @@ CORSの都合上レスポンスの中身は読めませんが、以下のよう�
 
 ## サイトの追加・最終更新日の変更
 
-`assets/sites.js` を編集してください。`lastUpdated` は `'YYYY-MM-DD'` 形式、または `null` で未設定。
+`public/assets/sites.js` を編集してください。`lastUpdated` は `'YYYY-MM-DD'` 形式、または `null` で未設定。
 
 ## ドキュメント
 
 - [システム仕様書](docs/system-specification.md)
 - [オリジン外形監視セットアップ](docs/uptime-monitoring.md)
-- [auto-merge ワークフロー導入手順](docs/auto-merge-setup.md)
+- [セキュリティ保守記録](docs/security-maintenance.md)
 
 ## デプロイ
 
-任意の静的ホスティング (GitHub Pages / Cloudflare Pages / nginx 等) に設置してください。
+公開対象は `public/` のみです。Cloudflare Workers Assets と GitHub Pages は `main` の更新でこのディレクトリを配信します。
