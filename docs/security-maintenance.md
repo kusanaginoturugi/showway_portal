@@ -8,7 +8,7 @@
 - Cloudflare 向け `_headers` と HTML の CSP / Referrer Policy を追加した。Cloudflare では `nosniff` とフレーム埋め込み禁止も設定した。GitHub Pages は `_headers` を解釈しないため、HTML の CSP が両配信先の共通対策となる。
 - CodeQL を `main` の push・PR・週次で実行し、Dependency Review を PR で実行する。GitHub Actions のバージョン更新は Dependabot が週次で確認する。npm 用 Dependabot と本番依存 audit は依存ファイルがないため設定していない。
 - Dependabot 脆弱性アラートを GitHub API で有効化し、GET の HTTP 204 を確認。直後のオープンアラートは 0 件。Dependabot security updates は未有効。
-- ローカルでは JavaScript 構文、公開ファイル数、差分の空白を確認。GitHub Actions と公開サイトの結果は push 後に確認する。
+- ローカルでは JavaScript 構文、公開ファイル数、差分の空白、Wrangler の dry run を確認。`main` の初回実行で Static Check、CodeQL、Deploy Pages、Cloudflare Workers Builds は成功した。CodeQL のオープンアラートは 0 件。GitHub Pages のトップと JS は 200、旧ルートの `wrangler.jsonc` と `docs/security-maintenance.md` は 404 を確認した。
 
 ### 継続点検
 
